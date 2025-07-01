@@ -31,13 +31,8 @@ class Reminders extends Controller{
     }
 
     public function editForm($id){
-        $model = $this->model('Reminder')
-        $model->getById((int)$id);
-
-        if (!$reminder) {
-            echo 'Reminder not found';
-            exit;
-        }
+        $model = $this->model('Reminder');
+        $reminder = $model->getById((int)$id);
 
         $this->view('reminders/editForm', [
             'reminder' => $reminder
@@ -54,6 +49,14 @@ class Reminders extends Controller{
         $model = $this->model('Reminder');
         $model->update((int)$id, $subject);
 
+        header('Location: /reminders');
+        exit;
+    }
+
+    public function delete($id){
+        $model = $this->model('Reminder');
+        $model->delete((int)$id);
+        
         header('Location: /reminders');
         exit;
     }

@@ -43,8 +43,8 @@ class Reminder {
                AND user_id = :user_id
         ");
         $stmt->execute([
-            ':id'       => $id,
-            ':user_id'  => $_SESSION['user_id'],
+            ':id' => $id,
+            ':user_id' => $_SESSION['user_id'],
         ]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row ?: null;
@@ -52,7 +52,7 @@ class Reminder {
 
     public function update(int $id, string $subject): bool
     {
-        $db   = db_connect();
+        $db = db_connect();
         $stmt = $db->prepare(
             "UPDATE notes
                 SET subject = :subject
@@ -60,9 +60,24 @@ class Reminder {
                 AND user_id = :user_id"
         );
         return $stmt->execute([
-            ':id'       => $id,
-            ':user_id'  => $_SESSION['user_id'],
-            ':subject'  => $subject
+            ':id' => $id,
+            ':user_id' => $_SESSION['user_id'],
+            ':subject' => $subject
+        ]);
+    }
+
+    public function delete(int $id): bool
+    {
+        $db = db_connect();
+        $stmt = $db->prepare(
+            "DELETE
+               FROM notes
+              WHERE id = :id
+                AND user_id = :user_id"
+        );
+        return $stmt->execute([
+            ':id' => $id,
+            ':user_id' => $_SESSION['user_id'],
         ]);
     }
 
