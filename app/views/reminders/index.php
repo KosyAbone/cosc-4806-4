@@ -95,9 +95,7 @@
         <p><strong>Subject:</strong> <?= htmlspecialchars($reminder['subject'], ENT_QUOTES) ?></p>
         <p>
           <strong>Created At:</strong> 
-          <?= (new DateTime($reminder['created_at'], new DateTimeZone('UTC')))
-                ->setTimezone(new DateTimeZone('America/Toronto'))
-                ->format('Y-m-d H:i') ?>
+          <?= $reminder['created_at']?>
         </p>
         <p>
           <strong>Completed:</strong>
