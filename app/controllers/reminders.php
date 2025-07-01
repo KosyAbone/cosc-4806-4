@@ -10,4 +10,9 @@ class Reminders extends Controller {
             'reminders' => $allReminders
         ]);
     }
+
+    public function create(){
+        
+        $this->view('reminders/create');
+    }
 }
