@@ -60,4 +60,12 @@ class Reminders extends Controller{
         header('Location: /reminders');
         exit;
     }
+
+    public function toggle($id){
+        $model = $this->model('Reminder');
+        $model->toggleCompleted((int)$id);
+        
+        header('Location: /reminders');
+        exit;
+    }
 }

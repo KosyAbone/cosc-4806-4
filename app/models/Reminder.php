@@ -82,4 +82,34 @@ class Reminder {
         ]);
     }
 
+    public function toggleCompleted(int $id): bool {
+        $db = db_connect();
+        // read current state
+        $stmt = $db->prepare("
+            SELECT completed
+              FROM notes
+             WHERE id = :id
+               AND user_id = :user_id
+        ");
+        $stmt->execute([
+            ':id' => $id,
+            ':user_id' => $_SESSION['user_id']
+        ]);
+        $current = (int)$stmt->fetchColumn();
+
+        // flip it
+        $newState = $current ? 0 : 1;
+        $stmt = $db->prepare("
+            UPDATE notes
+               SET completed = :completed
+             WHERE id = :id
+               AND user_id = :user_id
+        ");
+        return $stmt->execute([
+            ':completed' => $newState,
+            ':id' => $id,
+            ':user_id' => $_SESSION['user_id']
+        ]);
+    }
+
 }

@@ -1,5 +1,5 @@
 <?php 
-    require_once 'app/views/templates/header.php';
+    require_once 'app/views/templates/header.php'; 
     $data = $data ?? ['reminders' => []];
 ?>
 
@@ -13,12 +13,23 @@
 
     <ul class="list-group">
       <?php foreach ($data['reminders'] as $reminder): ?>
+        <?php 
+          $toggleClass = $reminder['completed']
+            ? 'btn-outline-secondary'
+            : 'btn-outline-success';
+          $toggleText  = $reminder['completed']
+            ? 'Mark Undone'
+            : 'Mark Done';
+        ?>
         <li class="list-group-item d-flex justify-content-between align-items-center">
-          <div>
+          <div style="<?= $reminder['completed'] ? 'text-decoration: line-through;' : '' ?>">
             <strong><?= htmlspecialchars($reminder['subject'], ENT_QUOTES) ?></strong><br>
-            <small class="text-muted">(created at <?= $reminder['created_at'] ?>)</small>
+            <small class="text-muted">
+              (created at <?= date('Y-m-d H:i', strtotime($reminder['created_at'])) ?>)
+            </small>
           </div>
           <div class="btn-group">
+            <!-- View details -->
             <button 
               type="button" 
               class="btn btn-sm btn-outline-info" 
@@ -28,14 +39,27 @@
               View
             </button>
 
-            <a href="/reminders/editForm/<?= $reminder['id'] ?>" 
-               class="btn btn-sm btn-outline-primary"
+            <!-- Update -->
+            <a 
+              href="/reminders/editForm/<?= $reminder['id'] ?>" 
+              class="btn btn-sm btn-outline-primary"
             >
               Update
             </a>
-            <a href="/reminders/delete/<?= $reminder['id'] ?>" 
-               class="btn btn-sm btn-outline-danger"
-               onclick="return confirm('Delete this reminder?');"
+
+            <!-- Toggle Completed (after Update) -->
+            <a 
+              href="/reminders/toggle/<?= $reminder['id'] ?>" 
+              class="btn btn-sm <?= $toggleClass ?>"
+            >
+              <?= $toggleText ?>
+            </a>
+
+            <!-- Delete -->
+            <a 
+              href="/reminders/delete/<?= $reminder['id'] ?>" 
+              class="btn btn-sm btn-outline-danger"
+              onclick="return confirm('Are you sure you want to delete this reminder?');"
             >
               Delete
             </a>
@@ -44,7 +68,6 @@
       <?php endforeach; ?>
     </ul>
 </div>
-
 
 <?php foreach ($data['reminders'] as $reminder): ?>
 <div 
@@ -70,10 +93,15 @@
       <div class="modal-body">
         <p><strong>ID:</strong> <?= $reminder['id'] ?></p>
         <p><strong>Subject:</strong> <?= htmlspecialchars($reminder['subject'], ENT_QUOTES) ?></p>
-        <p><strong>Created At:</strong> <?= $reminder['created_at'] ?></p>
+        <p>
+          <strong>Created At:</strong> 
+          <?= (new DateTime($reminder['created_at'], new DateTimeZone('UTC')))
+                ->setTimezone(new DateTimeZone('America/Toronto'))
+                ->format('Y-m-d H:i') ?>
+        </p>
         <p>
           <strong>Completed:</strong>
-          <?= !empty($reminder['completed']) ? 'Yes' : 'No' ?>
+          <?= $reminder['completed'] ? 'Yes' : 'No' ?>
         </p>
       </div>
       <div class="modal-footer">
