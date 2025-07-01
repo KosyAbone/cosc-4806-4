@@ -1,18 +1,32 @@
 <?php
 
-class Reminders extends Controller {
-    public function index() {
+class Reminders extends Controller{
+    public function index()
+    {
         $reminderModel = $this->model('Reminder');
-
-        $allReminders = $reminderModel->getAllReminders();
-
+        $reminders = $reminderModel->getAllReminders();
+        
         $this->view('reminders/index', [
-            'reminders' => $allReminders
+            'reminders' => $reminders
         ]);
     }
 
-    public function create(){
+    public function createForm(){
+        $this->view('reminders/createForm');
+    }
+
+    public function create()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: /reminders/createForm');
+            exit;
+        }
+
+        $subject = trim($_POST['subject'] ?? '');
+        $model = $this->model('Reminder');             
+        $model->create($subject);         
         
-        $this->view('reminders/create');
+        header('Location: /reminders');
+        exit;
     }
 }

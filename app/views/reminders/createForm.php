@@ -3,7 +3,7 @@
 <div class="container">
   <h1>Create New Reminder</h1>
 
-  <form action="/reminders/store" method="post">
+  <form action="/reminders/create" method="post">
     <div>
       <label for="subject">Subject</label><br>
       <input
