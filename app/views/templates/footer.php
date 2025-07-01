@@ -1,4 +1,4 @@
-<footer class="footer">    
+<footer class="footer m-5">    
     <div class="row">
         <div class="col-lg-12">
             <p>Copyright &copy; <?php echo date('Y'); ?> </p>

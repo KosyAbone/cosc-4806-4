@@ -23,18 +23,21 @@ class Reminder {
     }
     
     public function getAllReminders(): array {
-        $db = db_connect();
+        $db   = db_connect();
         $stmt = $db->prepare(
-            "SELECT * 
-               FROM notes 
+            "SELECT *
+               FROM notes
+              WHERE user_id = :user_id
+                AND deleted = 0
            ORDER BY created_at DESC"
         );
-        $stmt->execute();
+        $stmt->execute([
+            ':user_id' => $_SESSION['user_id']
+        ]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getById(int $id): ?array
-    {
+    public function getById(int $id): ?array {
         $db   = db_connect();
         $stmt = $db->prepare("
             SELECT id, subject, created_at
@@ -50,8 +53,7 @@ class Reminder {
         return $row ?: null;
     }
 
-    public function update(int $id, string $subject): bool
-    {
+    public function update(int $id, string $subject): bool {
         $db = db_connect();
         $stmt = $db->prepare(
             "UPDATE notes
@@ -66,8 +68,7 @@ class Reminder {
         ]);
     }
 
-    public function delete(int $id): bool
-    {
+    public function delete(int $id): bool {
         $db = db_connect();
         $stmt = $db->prepare(
             "DELETE

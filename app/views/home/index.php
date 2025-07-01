@@ -1,6 +1,4 @@
 <?php require_once 'app/views/templates/header.php'; ?>
-<?php
-date_default_timezone_set('America/Toronto'); ?>
 
 <style>
     body {

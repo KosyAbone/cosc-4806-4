@@ -1,5 +1,6 @@
 <?php
 
+date_default_timezone_set('America/Toronto');
 error_reporting(0);
 ini_set('session.gc_maxlifetime', 28800);
 ini_set('session.gc_probability', 1);
