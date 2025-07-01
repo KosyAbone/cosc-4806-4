@@ -5,25 +5,38 @@
 
 <div class="container">
     <div class="container">
-        <h1><?= $_SESSION['username'] ?>'s Reminders</h1>
-        <p><a href="/reminders/createForm">Create New Reminder</a></p>
+        <h1 class="mb-4"><?= $_SESSION['username'] ?>'s Reminders</h1>
+        <p>
+          <a href="/reminders/createForm" class="btn btn-success mb-3">
+            Create New Reminder
+          </a>
+        </p>
 
-        <ul>
+        <ul class="list-group">
           <?php foreach ($data['reminders'] as $reminder): ?>
-            <li>
-              <strong><?= htmlspecialchars($reminder['subject'], ENT_QUOTES) ?></strong>
-              <em>(created at <?= $reminder['created_at'] ?>)</em>
-              
-              <a href="/reminders/editForm/<?= $reminder['id'] ?>"
-              >Update</a>
-
-              <a href="/reminders/delete/<?= $reminder['id'] ?>"
-                onclick="return confirm('Are you sure you want to delete this reminder?');"
-                
-              >Delete</a>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <div>
+                <strong><?= htmlspecialchars($reminder['subject'], ENT_QUOTES) ?></strong>
+                <br>
+                <small class="text-muted">(created at <?= $reminder['created_at'] ?>)</small>
+              </div>
+              <div class="btn-group">
+                <a 
+                  href="/reminders/editForm/<?= $reminder['id'] ?>" 
+                  class="btn btn-sm btn-outline-primary"
+                >
+                  Update
+                </a>
+                <a 
+                  href="/reminders/delete/<?= $reminder['id'] ?>" 
+                  class="btn btn-sm btn-outline-danger"
+                  onclick="return confirm('Are you sure you want to delete this reminder?');"
+                >
+                  Delete
+                </a>
+              </div>
             </li>
           <?php endforeach; ?>
         </ul>
     </div>
-
 <?php require_once 'app/views/templates/footer.php'; ?>
