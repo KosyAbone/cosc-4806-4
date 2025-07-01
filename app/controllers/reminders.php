@@ -1,9 +1,13 @@
 <?php
 
-class Reminders extends Controller
-{
-    public function index(){
+class Reminders extends Controller {
+    public function index() {
+        $reminderModel = $this->model('Reminder');
 
-        $this->view('reminders/index');
+        $allReminders = $reminderModel->getAll();
+
+        $this->view('reminders/index', [
+            'reminders' => $allReminders
+        ]);
     }
 }
