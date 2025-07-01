@@ -30,6 +30,20 @@ class Reminders extends Controller{
         exit;
     }
 
+    public function editForm($id){
+        $model = $this->model('Reminder')
+        $model->getById((int)$id);
+
+        if (!$reminder) {
+            echo 'Reminder not found';
+            exit;
+        }
+
+        $this->view('reminders/editForm', [
+            'reminder' => $reminder
+        ]);
+    }
+
     public function update($id){
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header("Location: /reminders/editForm/$id");
