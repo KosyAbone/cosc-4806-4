@@ -6,6 +6,7 @@
 <div class="container">
     <div class="container">
         <h1>Welcome, <?= $_SESSION['username'] ?>!</h1>
+        <p><a href="/reminders/create">Create New Reminder</a></p>
         <h1>Your Reminders</h1>
 
         <ul>
