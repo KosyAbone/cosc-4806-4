@@ -1,6 +1,11 @@
 <?php
 
 class Reminder {
+    
+    public function __construct() {
+
+    }
+    
     public function getAllReminders(): array {
         $db = db_connect();
         $stmt = $db->prepare(
