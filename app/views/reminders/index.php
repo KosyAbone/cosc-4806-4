@@ -15,8 +15,7 @@
               <strong><?= htmlspecialchars($reminder['subject'], ENT_QUOTES) ?></strong>
               <em>(created at <?= $reminder['created_at'] ?>)</em>
               <!-- Update button -->
-              <a href="/reminders/editForm/<?= $reminder['id'] ?>" 
-                 style="margin-left:1em;"
+              <a href="/reminders/editForm/<?= $reminder['id'] ?>"
               >Update</a>
 
               <a href="/reminders/delete/<?= $reminder['id'] ?>"

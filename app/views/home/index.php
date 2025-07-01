@@ -52,9 +52,9 @@ date_default_timezone_set('America/Toronto'); ?>
     <h1>Welcome, <?=$_SESSION['username'] ?>!</h1>
     <p class="lead"><?= date("l, F j, Y, g:i A"); ?></p>
 
-    <p>
-        <a href="/logout">Logout</a>
-    </p>
+    <p><a href="/reminders">Go To Reminders</a></p>
+    
+    <p><a href="/logout">Logout</a></p>
 </div>
 
 <?php require_once 'app/views/templates/footer.php'; ?>
