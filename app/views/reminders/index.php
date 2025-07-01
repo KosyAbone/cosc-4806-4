@@ -5,9 +5,8 @@
 
 <div class="container">
     <div class="container">
-        <h1>Welcome, <?= $_SESSION['username'] ?>!</h1>
+        <h1><?= $_SESSION['username'] ?>'s Reminders</h1>
         <p><a href="/reminders/createForm">Create New Reminder</a></p>
-        <h1>Your Reminders</h1>
 
         <ul>
           <?php foreach ($data['reminders'] as $reminder): ?>
