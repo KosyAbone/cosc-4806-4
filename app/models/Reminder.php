@@ -33,4 +33,20 @@ class Reminder {
         ]);
     }
 
+    public function update(int $id, string $subject): bool
+    {
+        $db   = db_connect();
+        $stmt = $db->prepare(
+            "UPDATE notes
+                SET subject = :subject
+              WHERE id = :id
+                AND user_id = :user_id"
+        );
+        return $stmt->execute([
+            ':id'       => $id,
+            ':user_id'  => $_SESSION['user_id'],
+            ':subject'  => $subject
+        ]);
+    }
+
 }
