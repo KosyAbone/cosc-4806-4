@@ -2,6 +2,6 @@
 
 class Reminder {
     public function getAll() {
-        echo 'reminder';
+        echo 'reminder'; die;
     }
 }
