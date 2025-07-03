@@ -29,6 +29,9 @@ if (!isset($_SESSION['auth'])) {
         <li class="nav-item">
           <a class="nav-link" href="/about">About Me</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/reminders">Reminders</a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
@@ -39,7 +42,6 @@ if (!isset($_SESSION['auth'])) {
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
-        </li>
         <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
         </li>
